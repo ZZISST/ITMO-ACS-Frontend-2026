@@ -192,7 +192,7 @@ async function initFavorite() {
   const button = document.querySelector('[data-favorite]');
 
   if (isLoggedIn()) {
-    const [favorite] = await api.get(`/favorites?userId=${getUser().id}&restaurantId=${restaurantId}`);
+    const [favorite] = await api.getOwnList(`/favorites?userId=${getUser().id}&restaurantId=${restaurantId}`);
     favoriteId = favorite?.id ?? null;
     setFavoriteState(Boolean(favoriteId));
   }

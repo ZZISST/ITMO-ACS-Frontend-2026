@@ -89,9 +89,9 @@ async function loadProfile() {
   try {
     const [user, bookings, reviews, favorites, cuisines] = await Promise.all([
       api.get(`/users/${id}`),
-      api.get(`/bookings?userId=${id}&_expand=restaurant`),
+      api.getOwnList(`/bookings?userId=${id}&_expand=restaurant`),
       api.get(`/reviews?userId=${id}`),
-      api.get(`/favorites?userId=${id}&_expand=restaurant`),
+      api.getOwnList(`/favorites?userId=${id}&_expand=restaurant`),
       api.get('/cuisines'),
     ]);
 

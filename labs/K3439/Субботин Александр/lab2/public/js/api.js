@@ -85,6 +85,17 @@ async function request(path, { method = 'GET', body } = {}) {
   return data;
 }
 
+// Правило 600 пропускает GET списка, только если в коллекции уже есть хотя бы одна запись
+// пользователя, иначе отвечает 403. Для нового пользователя без броней и избранного это пустой список
+async function getOwnList(path) {
+  try {
+    return await request(path);
+  } catch (error) {
+    if (error.status === 403) return [];
+    throw error;
+  }
+}
+
 function redirectToLogin() {
   const next = window.location.pathname.split('/').pop() + window.location.search;
   window.location.href = `login.html?next=${encodeURIComponent(next)}`;
@@ -92,6 +103,7 @@ function redirectToLogin() {
 
 const api = {
   get: (path) => request(path),
+  getOwnList,
   post: (path, body) => request(path, { method: 'POST', body }),
   patch: (path, body) => request(path, { method: 'PATCH', body }),
   delete: (path) => request(path, { method: 'DELETE' }),

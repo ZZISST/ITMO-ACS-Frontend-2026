@@ -72,9 +72,9 @@ function render() {
 async function loadBookings() {
   list.innerHTML = loaderHtml('Загружаем брони…');
   try {
-    // json-server-auth отдаёт только брони владельца токена. Сортировку по нескольким полям
-    // (_sort=date,time) его проверка доступа не переваривает, поэтому время досортировываем здесь
-    const data = await api.get(`/bookings?userId=${getUser().id}&_expand=restaurant&_sort=date&_order=desc`);
+    // Список сам json-server-auth не фильтрует, поэтому userId передаём явно. Сортировку по нескольким
+    // полям (_sort=date,time) его проверка доступа не переваривает, поэтому время досортировываем здесь
+    const data = await api.getOwnList(`/bookings?userId=${getUser().id}&_expand=restaurant&_sort=date&_order=desc`);
     bookings = data.sort((a, b) => `${b.date}${b.time}`.localeCompare(`${a.date}${a.time}`));
     render();
   } catch (error) {
