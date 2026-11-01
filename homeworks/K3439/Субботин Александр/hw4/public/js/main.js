@@ -164,6 +164,8 @@ function initPasswordToggles() {
       input.type = isHidden ? 'text' : 'password';
       btn.setAttribute('aria-pressed', String(isHidden));
       btn.setAttribute('aria-label', isHidden ? 'Скрыть пароль' : 'Показать пароль');
+      // Иконку меняем ссылкой на другой символ спрайта: открытый глаз ↔ перечёркнутый
+      btn.querySelector('use').setAttribute('href', `${SPRITE_URL}#${isHidden ? 'eye-off' : 'eye'}`);
     });
   });
 }
