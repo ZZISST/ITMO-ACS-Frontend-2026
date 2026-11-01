@@ -975,7 +975,16 @@ summary:focus-visible,
 .btn-primary:focus-visible,
 .nav-pills .nav-link.active:focus-visible {
   outline-color: #fff;
-  box-shadow: 0 0 0 5px var(--brand-dark);
+  /* тёмное кольцо шире белой обводки: «тёмный — белый — тёмный» виден на любом фоне */
+  box-shadow: 0 0 0 7px var(--brand-dark);
+}
+
+/* Стрелки карусели — во всю высоту фото, а Bootstrap обнуляет им outline: рисуем рамку внутри */
+.carousel-control-prev:focus-visible,
+.carousel-control-next:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -8px;
+  box-shadow: inset 0 0 0 5px var(--brand-dark);
 }
 
 /* Красные кнопки Bootstrap задают цвет внутри класса, поэтому переопределяем их отдельно */
