@@ -82,7 +82,7 @@ function renderMenu() {
 
 function reviewHtml(review, isNew = false) {
   return `
-    <article class="review${isNew ? ' review-new' : ''}">
+    <article class="review${isNew ? ' review-new' : ''}"${isNew ? ' tabindex="-1"' : ''}>
       <div class="d-flex align-items-center gap-3 mb-2">
         <span class="avatar avatar-sm" aria-hidden="true">${escapeHtml(getInitials(review.author))}</span>
         <div>
@@ -144,7 +144,18 @@ function initBooking() {
     bookingForm.elements.guests.value = data.get('guests');
     const slot = bookingForm.querySelector(`input[name="time"][value="${data.get('time')}"]`);
     if (slot && !slot.disabled) slot.checked = true;
-    bookingModal.show();
+    bookingModal.show(quickForm.querySelector('[type="submit"]'));
+  });
+
+  // Если модалку открыли не кнопкой с data-bs-toggle (быстрая форма, ссылка #booking),
+  // Bootstrap не вернёт фокус — возвращаем на кнопку, которая её открыла, или на «Забронировать»
+  let returnFocusTo = null;
+  bookingModalEl.addEventListener('show.bs.modal', (event) => {
+    returnFocusTo = event.relatedTarget ?? document.querySelector('[data-bs-target="#bookingModal"]');
+  });
+  bookingModalEl.addEventListener('hidden.bs.modal', () => {
+    const focusLost = document.activeElement === document.body || bookingModalEl.contains(document.activeElement);
+    if (focusLost) returnFocusTo?.focus();
   });
 
   bookingModalEl.addEventListener('show.bs.modal', () => {
@@ -248,6 +259,8 @@ function initReviewForm() {
       resetValidation(form);
       bootstrap.Collapse.getOrCreateInstance('#reviewFormWrap', { toggle: false }).hide();
       showToast('Спасибо! Отзыв опубликован.');
+      // Форма свернулась вместе с кнопкой в фокусе — показываем пользователю его отзыв
+      document.querySelector('.review-new').focus();
     } catch (error) {
       showFormError(form, error.message);
     }
@@ -258,7 +271,9 @@ function initReviewForm() {
     event.preventDefault();
     const tab = document.querySelector(event.currentTarget.dataset.openTab);
     bootstrap.Tab.getOrCreateInstance(tab).show();
-    tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    tab.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
+    // Фокус — на открытую панель, чтобы следующий Tab шёл по отзывам, а не по шапке
+    document.querySelector(tab.dataset.bsTarget).focus({ preventScroll: true });
   });
 }
 

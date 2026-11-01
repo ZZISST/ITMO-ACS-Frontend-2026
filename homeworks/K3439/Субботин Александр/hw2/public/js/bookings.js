@@ -14,6 +14,7 @@ const STATUS = {
 let bookings = [];
 let currentFilter = 'all';
 let bookingToCancel = null;
+let cancelTrigger = null;
 
 // Бронь со статусом «подтверждена/ожидает», дата которой уже прошла, считаем завершённой
 function bookingGroup(booking) {
@@ -42,7 +43,7 @@ function bookingHtml(booking) {
   const group = bookingGroup(booking);
   const status = group === 'completed' ? STATUS.completed : STATUS[booking.status];
   return `
-    <article class="booking-item" data-status="${group}">
+    <article class="booking-item" data-status="${group}" data-booking-id="${booking.id}">
       <img class="booking-thumb" src="${booking.restaurant.image}" alt="" width="96" height="96">
       <div class="booking-info">
         <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
@@ -65,6 +66,7 @@ function render() {
   const visible = bookings.filter((b) => currentFilter === 'all' || bookingGroup(b) === currentFilter);
   list.innerHTML = visible.map(bookingHtml).join('');
   emptyState.classList.toggle('d-none', visible.length > 0);
+  document.querySelector('#bookingsStatus').textContent = `Показано бронирований: ${visible.length}`;
 
   document.querySelectorAll('[data-count]').forEach((badge) => {
     const key = badge.dataset.count;
@@ -88,19 +90,36 @@ async function loadBookings() {
 function initFilters() {
   document.querySelectorAll('[data-filter]').forEach((button) => {
     button.addEventListener('click', () => {
-      document.querySelectorAll('[data-filter]').forEach((b) => b.classList.toggle('active', b === button));
+      document.querySelectorAll('[data-filter]').forEach((b) => {
+        b.classList.toggle('active', b === button);
+        b.setAttribute('aria-pressed', String(b === button));
+      });
       currentFilter = button.dataset.filter;
       render();
     });
   });
 }
 
+// Модалка открыта из JS, поэтому Bootstrap не вернёт фокус сам. Если бронь отменили, кнопки
+// «Отменить» уже нет — переводим фокус на название ресторана в карточке или на фильтр
+function restoreFocusAfterCancel() {
+  if (document.body.contains(cancelTrigger)) {
+    cancelTrigger.focus();
+    return;
+  }
+  const card = list.querySelector(`[data-booking-id="${bookingToCancel.id}"] h2 a`);
+  (card ?? document.querySelector('[data-filter].active')).focus();
+}
+
 function initCancel() {
+  document.querySelector('#cancelModal').addEventListener('hidden.bs.modal', restoreFocusAfterCancel);
+
   list.addEventListener('click', (event) => {
     const button = event.target.closest('[data-cancel]');
     if (!button) return;
 
     bookingToCancel = bookings.find((b) => b.id === Number(button.dataset.cancel));
+    cancelTrigger = button;
     document.querySelector('#cancelRestaurant').textContent = bookingToCancel.restaurant.name;
     document.querySelector('#cancelWhen').textContent = `${formatDate(bookingToCancel.date)}, ${bookingToCancel.time}`;
     cancelModal.show();

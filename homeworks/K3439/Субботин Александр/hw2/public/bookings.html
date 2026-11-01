@@ -73,13 +73,14 @@
         </div>
 
         <div class="col-lg-9">
-          <ul class="nav nav-pills booking-filters mb-4">
-              <li class="nav-item"><button class="nav-link active" type="button" data-filter="all">Все <span class="badge rounded-pill bg-light text-dark" data-count="all">0</span></button></li>
-              <li class="nav-item"><button class="nav-link" type="button" data-filter="upcoming">Предстоящие <span class="badge rounded-pill bg-light text-dark" data-count="upcoming">0</span></button></li>
-              <li class="nav-item"><button class="nav-link" type="button" data-filter="completed">Завершённые <span class="badge rounded-pill bg-light text-dark" data-count="completed">0</span></button></li>
-              <li class="nav-item"><button class="nav-link" type="button" data-filter="cancelled">Отменённые <span class="badge rounded-pill bg-light text-dark" data-count="cancelled">0</span></button></li>
+          <ul class="nav nav-pills booking-filters mb-4" aria-label="Фильтр по статусу">
+              <li class="nav-item"><button class="nav-link active" type="button" data-filter="all" aria-pressed="true">Все <span class="badge rounded-pill bg-light text-dark" data-count="all">0</span></button></li>
+              <li class="nav-item"><button class="nav-link" type="button" data-filter="upcoming" aria-pressed="false">Предстоящие <span class="badge rounded-pill bg-light text-dark" data-count="upcoming">0</span></button></li>
+              <li class="nav-item"><button class="nav-link" type="button" data-filter="completed" aria-pressed="false">Завершённые <span class="badge rounded-pill bg-light text-dark" data-count="completed">0</span></button></li>
+              <li class="nav-item"><button class="nav-link" type="button" data-filter="cancelled" aria-pressed="false">Отменённые <span class="badge rounded-pill bg-light text-dark" data-count="cancelled">0</span></button></li>
           </ul>
 
+          <p class="visually-hidden" role="status" id="bookingsStatus"></p>
           <div class="d-grid gap-3" id="bookingsList"></div>
 
           <div class="empty-state text-center py-5 d-none" id="bookingsEmpty">

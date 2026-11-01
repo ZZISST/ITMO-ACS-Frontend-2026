@@ -146,8 +146,11 @@ function initFavorites() {
     button.disabled = true;
     try {
       await api.delete(`/favorites/${item.dataset.favoriteId}`);
+      // Удалённая кнопка была в фокусе — переводим его на соседнюю карточку или на заголовок блока
+      const neighbour = item.nextElementSibling ?? item.previousElementSibling;
       item.remove();
       updateFavoritesCount();
+      (neighbour?.querySelector('[data-remove-favorite]') ?? document.querySelector('#favoritesTitle')).focus();
       showToast(`«${name}» удалён из избранного`, 'secondary');
     } catch (error) {
       button.disabled = false;

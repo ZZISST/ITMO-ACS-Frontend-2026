@@ -52,18 +52,24 @@ function initLogout() {
   });
 }
 
-// Всплывающее уведомление на базе Bootstrap Toast
+// Контейнер для тостов — live-область. Он создаётся заранее: скринридер объявляет только
+// изменения внутри уже существующей области, а не элемент, вставленный вместе с текстом
+function createToastContainer() {
+  const container = document.createElement('div');
+  container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+  container.setAttribute('aria-live', 'polite');
+  container.setAttribute('aria-atomic', 'false');
+  document.body.append(container);
+  return container;
+}
+
+// Всплывающее уведомление на базе Bootstrap Toast. Ошибка не прячется сама — её закрывают кнопкой
 function showToast(message, variant = 'success') {
-  let container = document.querySelector('.toast-container');
-  if (!container) {
-    container = document.createElement('div');
-    container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
-    document.body.append(container);
-  }
+  const container = document.querySelector('.toast-container') ?? createToastContainer();
+  const isError = variant === 'danger';
 
   const toast = document.createElement('div');
   toast.className = `toast align-items-center text-bg-${variant} border-0`;
-  toast.setAttribute('role', 'status');
   toast.innerHTML = `
     <div class="d-flex">
       <div class="toast-body"></div>
@@ -72,7 +78,7 @@ function showToast(message, variant = 'success') {
   toast.querySelector('.toast-body').textContent = message;
   container.append(toast);
 
-  const instance = bootstrap.Toast.getOrCreateInstance(toast, { delay: 4000 });
+  const instance = bootstrap.Toast.getOrCreateInstance(toast, { delay: 6000, autohide: !isError });
   toast.addEventListener('hidden.bs.toast', () => toast.remove());
   instance.show();
 }
@@ -155,7 +161,13 @@ function initPasswordToggles() {
   });
 }
 
+// Плавная прокрутка только если пользователь не просил уменьшить анимацию
+function scrollBehavior() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  if (!document.querySelector('.toast-container')) createToastContainer();
   renderAuthState();
   initLogout();
   initPasswordToggles();
