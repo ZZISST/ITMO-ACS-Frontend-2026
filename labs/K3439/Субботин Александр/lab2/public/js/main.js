@@ -1,20 +1,6 @@
-// Общий скрипт для всех страниц «Столика»
+// Общий скрипт для всех страниц «Столика». Подключается после api.js.
 
-const USER_KEY = 'stolik-user';
-
-function getUser() {
-  try {
-    return JSON.parse(localStorage.getItem(USER_KEY));
-  } catch {
-    return null;
-  }
-}
-
-function saveUser(user) {
-  localStorage.setItem(USER_KEY, JSON.stringify(user));
-}
-
-function getInitials(name) {
+function getInitials(name = '') {
   return name
     .split(' ')
     .filter(Boolean)
@@ -23,10 +9,9 @@ function getInitials(name) {
     .join('');
 }
 
-// Переключаем шапку между «гостем» и «авторизованным пользователем».
-// В ЛР1 факт входа просто хранится в localStorage, без сервера.
+// Переключаем шапку между «гостем» и вошедшим пользователем по данным из localStorage
 function renderAuthState() {
-  const user = getUser();
+  const user = isLoggedIn() ? getUser() : null;
 
   document.querySelectorAll('[data-guest]').forEach((el) => {
     el.classList.toggle('d-none', Boolean(user));
@@ -51,10 +36,17 @@ function renderAuthState() {
   });
 }
 
+// Для закрытых страниц: без токена отправляем на вход и возвращаем обратно после него
+function requireAuth() {
+  if (isLoggedIn()) return true;
+  redirectToLogin();
+  return false;
+}
+
 function initLogout() {
   document.querySelectorAll('[data-logout]').forEach((btn) => {
     btn.addEventListener('click', () => {
-      localStorage.removeItem(USER_KEY);
+      clearAuth();
       window.location.href = 'index.html';
     });
   });
@@ -85,9 +77,10 @@ function showToast(message, variant = 'success') {
   instance.show();
 }
 
-// Bootstrap-валидация: подсвечиваем поля и вызываем handler только для валидной формы
+// Bootstrap-валидация: подсвечиваем поля и вызываем handler только для валидной формы.
+// Пока handler ждёт ответа API, кнопка отправки заблокирована.
 function onValidSubmit(form, handler) {
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     form.classList.add('was-validated');
 
@@ -95,8 +88,22 @@ function onValidSubmit(form, handler) {
       form.querySelector(':invalid')?.focus();
       return;
     }
-    handler(new FormData(form), form);
+
+    const submit = form.querySelector('[type="submit"]') ?? document.querySelector(`[type="submit"][form="${form.id}"]`);
+    submit?.setAttribute('disabled', '');
+    try {
+      await handler(new FormData(form), form);
+    } finally {
+      submit?.removeAttribute('disabled');
+    }
   });
+}
+
+// Сообщение об ошибке внутри формы (alert над кнопкой)
+function showFormError(form, message) {
+  const alert = form.querySelector('[data-form-error]');
+  alert.textContent = message;
+  alert.classList.toggle('d-none', !message);
 }
 
 // Кнопка «глаз» рядом с полем пароля

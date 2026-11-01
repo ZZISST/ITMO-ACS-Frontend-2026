@@ -1,37 +1,42 @@
-// Вход, регистрация и восстановление пароля.
-// В ЛР1 сервера нет: аккаунты складываются в localStorage, пароль не храним.
+// Вход, регистрация и восстановление пароля через json-server-auth
 
-const ACCOUNTS_KEY = 'stolik-accounts';
-
-function getAccounts() {
-  try {
-    return JSON.parse(localStorage.getItem(ACCOUNTS_KEY)) ?? [];
-  } catch {
-    return [];
-  }
-}
-
-function nameFromEmail(email) {
-  const login = email.split('@')[0];
-  return login.charAt(0).toUpperCase() + login.slice(1);
+// После входа возвращаем туда, откуда пришли (?next=profile.html).
+// Пропускаем только локальные страницы, чтобы ссылкой нельзя было увести на чужой сайт.
+function nextPage() {
+  const next = new URLSearchParams(window.location.search).get('next') ?? '';
+  return /^[\w-]+\.html(\?[\w=&%-]*)?$/.test(next) ? next : 'profile.html';
 }
 
 function initLoginForm() {
   const form = document.querySelector('#loginForm');
   if (!form) return;
 
-  onValidSubmit(form, (data) => {
-    const email = data.get('email').trim().toLowerCase();
-    const account = getAccounts().find((acc) => acc.email === email);
+  // Уже вошли — на странице входа делать нечего
+  if (isLoggedIn()) {
+    window.location.replace(nextPage());
+    return;
+  }
 
-    saveUser({ name: account?.name ?? nameFromEmail(email), email, phone: account?.phone ?? '' });
-    window.location.href = 'profile.html';
+  onValidSubmit(form, async (data) => {
+    showFormError(form, '');
+    try {
+      const { accessToken, user } = await api.login(data.get('email').trim().toLowerCase(), data.get('password'));
+      setAuth(accessToken, user);
+      window.location.href = nextPage();
+    } catch (error) {
+      showFormError(form, error.message);
+    }
   });
 }
 
 function initRegisterForm() {
   const form = document.querySelector('#registerForm');
   if (!form) return;
+
+  if (isLoggedIn()) {
+    window.location.replace('profile.html');
+    return;
+  }
 
   const password = form.querySelector('#registerPassword');
   const confirm = form.querySelector('#registerPasswordConfirm');
@@ -43,20 +48,28 @@ function initRegisterForm() {
   password.addEventListener('input', checkPasswordsMatch);
   confirm.addEventListener('input', checkPasswordsMatch);
 
-  onValidSubmit(form, (data) => {
-    const user = {
-      name: data.get('name').trim(),
-      email: data.get('email').trim().toLowerCase(),
-      phone: data.get('phone').trim(),
-    };
-
-    const accounts = getAccounts().filter((acc) => acc.email !== user.email);
-    localStorage.setItem(ACCOUNTS_KEY, JSON.stringify([...accounts, user]));
-    saveUser(user);
-    window.location.href = 'profile.html';
+  onValidSubmit(form, async (data) => {
+    showFormError(form, '');
+    try {
+      // json-server-auth сам хеширует пароль и сразу возвращает токен
+      const { accessToken, user } = await api.register({
+        email: data.get('email').trim().toLowerCase(),
+        password: data.get('password'),
+        name: data.get('name').trim(),
+        phone: data.get('phone').trim(),
+        birthday: '',
+        createdAt: new Date().toISOString().slice(0, 10),
+        notifications: { email: true, sms: true, news: false, remindBefore: 2 },
+      });
+      setAuth(accessToken, user);
+      window.location.href = 'profile.html';
+    } catch (error) {
+      showFormError(form, error.message);
+    }
   });
 }
 
+// Отдельного эндпоинта для сброса пароля у json-server-auth нет — только имитация
 function initResetForm() {
   const form = document.querySelector('#resetForm');
   if (!form) return;
