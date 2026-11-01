@@ -35,6 +35,9 @@
   --bs-danger-text-emphasis: #8a1f2a;
   --bs-form-invalid-color: #b02a37;
   --bs-form-invalid-border-color: #b02a37;
+  /* Зелёный «поле заполнено верно» (#198754) на кремовом фоне модалок — тоже 4.2:1 */
+  --bs-form-valid-color: #146c43;
+  --bs-form-valid-border-color: #146c43;
 }
 
 body {
@@ -994,6 +997,16 @@ summary:focus-visible,
   --bs-btn-hover-border-color: var(--danger);
   --bs-btn-active-bg: #8a1f2a;
   --bs-btn-active-border-color: #8a1f2a;
+}
+
+/* Серая кнопка «Отмена» Bootstrap (#6c757d) в модалках на кремовом фоне — 4.4:1 */
+.btn-outline-secondary {
+  --bs-btn-color: var(--muted);
+  --bs-btn-border-color: var(--muted);
+  --bs-btn-hover-bg: var(--muted);
+  --bs-btn-hover-border-color: var(--muted);
+  --bs-btn-active-bg: var(--text);
+  --bs-btn-active-border-color: var(--text);
 }
 
 /* main получает фокус программно (ссылка-пропуск), рамка вокруг всей страницы не нужна */
