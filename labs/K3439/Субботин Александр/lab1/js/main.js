@@ -46,6 +46,9 @@ function renderAuthState() {
   document.querySelectorAll('[data-user-email]').forEach((el) => {
     el.textContent = user.email;
   });
+  document.querySelectorAll('[data-user-phone]').forEach((el) => {
+    el.textContent = user.phone || 'Телефон не указан';
+  });
 }
 
 function initLogout() {
