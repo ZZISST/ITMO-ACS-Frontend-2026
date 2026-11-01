@@ -82,9 +82,37 @@ function showToast(message, variant = 'success') {
   instance.show();
 }
 
+// Bootstrap-валидация: подсвечиваем поля и вызываем handler только для валидной формы
+function onValidSubmit(form, handler) {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    form.classList.add('was-validated');
+
+    if (!form.checkValidity()) {
+      form.querySelector(':invalid')?.focus();
+      return;
+    }
+    handler(new FormData(form), form);
+  });
+}
+
+// Кнопка «глаз» рядом с полем пароля
+function initPasswordToggles() {
+  document.querySelectorAll('[data-toggle-password]').forEach((btn) => {
+    const input = document.querySelector(btn.dataset.togglePassword);
+    btn.addEventListener('click', () => {
+      const isHidden = input.type === 'password';
+      input.type = isHidden ? 'text' : 'password';
+      btn.setAttribute('aria-pressed', String(isHidden));
+      btn.setAttribute('aria-label', isHidden ? 'Скрыть пароль' : 'Показать пароль');
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderAuthState();
   initLogout();
+  initPasswordToggles();
 
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = new Date().getFullYear();
