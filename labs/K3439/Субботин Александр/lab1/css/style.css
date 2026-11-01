@@ -470,6 +470,53 @@ h1, h2, h3, .display-font {
   color: var(--muted);
 }
 
+/* ---------- Поиск ---------- */
+
+.filter-title {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (min-width: 992px) {
+  .filters-panel {
+    position: sticky;
+    top: 5.5rem;
+  }
+
+  .filters-form {
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+}
+
+.search-field {
+  position: relative;
+  min-width: 220px;
+}
+
+.search-field .icon {
+  position: absolute;
+  top: 50%;
+  left: 0.9rem;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.search-field .form-control {
+  padding-left: 2.6rem;
+}
+
+.empty-state {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
 /* ---------- Подвал ---------- */
 
 .site-footer {
