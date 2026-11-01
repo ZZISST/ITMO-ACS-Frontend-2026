@@ -517,6 +517,215 @@ h1, h2, h3, .display-font {
   border-radius: var(--radius);
 }
 
+/* ---------- Страница ресторана ---------- */
+
+.badge-soft {
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  font-weight: 600;
+}
+
+.favorite-btn.active {
+  color: #fff;
+}
+
+.favorite-btn.active .icon {
+  fill: currentColor;
+}
+
+.gallery {
+  border-radius: calc(var(--radius) * 1.5);
+  overflow: hidden;
+}
+
+.gallery .carousel-item img {
+  height: clamp(220px, 40vw, 420px);
+  object-fit: cover;
+}
+
+.gallery .carousel-caption {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2.5rem 1.5rem 2.25rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+}
+
+.feature-list {
+  columns: 2;
+  padding-left: 1.2rem;
+}
+
+.feature-list li {
+  margin-bottom: 0.35rem;
+}
+
+.menu-section + .menu-section {
+  margin-top: 2rem;
+}
+
+.menu-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.menu-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.menu-item-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+/* Пунктирная «дорожка» между названием блюда и ценой, как в бумажном меню */
+.menu-item-head::after {
+  content: "";
+  order: 1;
+  flex-grow: 1;
+  border-bottom: 2px dotted #d8cabb;
+}
+
+.dish-name {
+  font-weight: 600;
+}
+
+.dish-price {
+  order: 2;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dish-desc {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.rating-big {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 0.1rem;
+}
+
+.star-on {
+  color: #e0a100;
+}
+
+.star-off {
+  color: #ddd3c7;
+}
+
+.progress {
+  --bs-progress-bar-bg: #e0a100;
+  --bs-progress-bg: #efe7dc;
+  height: 0.5rem;
+}
+
+.bar-value {
+  width: 2.5rem;
+  text-align: right;
+}
+
+.review {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.review-new {
+  border-color: var(--brand);
+}
+
+.review-form {
+  padding: 1.25rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+/* Звёздный рейтинг: радиокнопки в обратном порядке, чтобы ~ подсвечивал звёзды слева */
+.star-rating-inputs {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 0.15rem;
+}
+
+.star-rating-inputs label {
+  cursor: pointer;
+  color: #ddd3c7;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.star-rating-inputs label:hover,
+.star-rating-inputs label:hover ~ label,
+.star-rating-inputs input:checked ~ label {
+  color: #e0a100;
+}
+
+.star-rating-inputs input:focus-visible + label {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* У группы радиокнопок нет одного поля-соседа, поэтому показываем ошибку через :has */
+.was-validated .star-rating:has(:invalid) .invalid-feedback,
+.was-validated .time-slots:has(:invalid) .invalid-feedback {
+  display: block;
+}
+
+.booking-card {
+  position: sticky;
+  top: 5.5rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.map-placeholder {
+  position: relative;
+  height: 160px;
+  border-radius: 0.75rem;
+  background-color: #e8efe3;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.9) 6px, transparent 6px),
+    linear-gradient(rgba(255, 255, 255, 0.9) 6px, transparent 6px),
+    linear-gradient(35deg, transparent 48%, #c9dbe8 48%, #c9dbe8 56%, transparent 56%);
+  background-size: 60px 60px, 60px 60px, 100% 100%;
+}
+
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+  color: var(--brand);
+  font-size: 2.5rem;
+}
+
+.time-slots .btn-check:disabled + .btn {
+  text-decoration: line-through;
+}
+
 /* ---------- Подвал ---------- */
 
 .site-footer {
