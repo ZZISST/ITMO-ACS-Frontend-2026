@@ -295,8 +295,10 @@ async function loadRestaurant() {
   initReviewForm();
   initFavorite().catch((error) => showToast(error.message, 'danger'));
 
-  // Кнопки «Забронировать» в карточках ведут на restaurant.html?id=N#booking — сразу открываем модалку
+  // Кнопки «Забронировать» ведут на restaurant.html?id=N#booking — сразу открываем модалку,
+  // а «Оставить отзыв» из истории броней — на #reviews
   if (window.location.hash === '#booking') bookingModal.show();
+  if (window.location.hash === '#reviews') bootstrap.Tab.getOrCreateInstance('#reviews-tab').show();
 }
 
 loadRestaurant();

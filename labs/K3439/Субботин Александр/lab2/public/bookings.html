@@ -73,127 +73,13 @@
 
         <div class="col-lg-9">
           <ul class="nav nav-pills booking-filters mb-4">
-              <li class="nav-item"><button class="nav-link active" type="button" data-filter="all">Все <span class="badge rounded-pill bg-light text-dark" data-count="all">6</span></button></li>
-              <li class="nav-item"><button class="nav-link" type="button" data-filter="upcoming">Предстоящие <span class="badge rounded-pill bg-light text-dark" data-count="upcoming">2</span></button></li>
-              <li class="nav-item"><button class="nav-link" type="button" data-filter="completed">Завершённые <span class="badge rounded-pill bg-light text-dark" data-count="completed">3</span></button></li>
-              <li class="nav-item"><button class="nav-link" type="button" data-filter="cancelled">Отменённые <span class="badge rounded-pill bg-light text-dark" data-count="cancelled">1</span></button></li>
+              <li class="nav-item"><button class="nav-link active" type="button" data-filter="all">Все <span class="badge rounded-pill bg-light text-dark" data-count="all">0</span></button></li>
+              <li class="nav-item"><button class="nav-link" type="button" data-filter="upcoming">Предстоящие <span class="badge rounded-pill bg-light text-dark" data-count="upcoming">0</span></button></li>
+              <li class="nav-item"><button class="nav-link" type="button" data-filter="completed">Завершённые <span class="badge rounded-pill bg-light text-dark" data-count="completed">0</span></button></li>
+              <li class="nav-item"><button class="nav-link" type="button" data-filter="cancelled">Отменённые <span class="badge rounded-pill bg-light text-dark" data-count="cancelled">0</span></button></li>
           </ul>
 
-          <div class="d-grid gap-3" id="bookingsList">
-            <article class="booking-item" data-status="upcoming" data-booking-id="10482">
-              <img class="booking-thumb" src="img/italian.svg" alt="" width="96" height="96">
-              <div class="booking-info">
-                <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
-                  <h2 class="h5 mb-0"><a href="restaurant.html" data-booking-name>Траттория «Нонна»</a></h2>
-                  <span class="badge text-bg-success" data-booking-status>Подтверждено</span>
-                </div>
-                <ul class="meta-list">
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><time datetime="2026-11-08T19:30" data-booking-when>8 ноября 2026, 19:30</time></li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/></svg>2 гостя</li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Основной зал</li>
-                </ul>
-                <p class="small text-muted-warm mb-0 mt-1">Бронь № 10482</p>
-              </div>
-              <div class="booking-actions" data-booking-actions>
-                  <a class="btn btn-sm btn-outline-primary" href="restaurant.html#booking">Изменить</a>
-                  <button class="btn btn-sm btn-outline-danger" type="button" data-cancel>Отменить</button>
-              </div>
-            </article>
-            <article class="booking-item" data-status="upcoming" data-booking-id="10517">
-              <img class="booking-thumb" src="img/japanese.svg" alt="" width="96" height="96">
-              <div class="booking-info">
-                <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
-                  <h2 class="h5 mb-0"><a href="restaurant.html" data-booking-name>Сакура Дзэн</a></h2>
-                  <span class="badge text-bg-warning" data-booking-status>Ожидает подтверждения</span>
-                </div>
-                <ul class="meta-list">
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><time datetime="2026-11-15T20:00" data-booking-when>15 ноября 2026, 20:00</time></li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/></svg>4 гостя</li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>У окна</li>
-                </ul>
-                <p class="small text-muted-warm mb-0 mt-1">Бронь № 10517</p>
-              </div>
-              <div class="booking-actions" data-booking-actions>
-                  <a class="btn btn-sm btn-outline-primary" href="restaurant.html#booking">Изменить</a>
-                  <button class="btn btn-sm btn-outline-danger" type="button" data-cancel>Отменить</button>
-              </div>
-            </article>
-            <article class="booking-item" data-status="completed" data-booking-id="10311">
-              <img class="booking-thumb" src="img/steak.svg" alt="" width="96" height="96">
-              <div class="booking-info">
-                <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
-                  <h2 class="h5 mb-0"><a href="restaurant.html" data-booking-name>Мясо &amp; Угли</a></h2>
-                  <span class="badge text-bg-secondary" data-booking-status>Завершено</span>
-                </div>
-                <ul class="meta-list">
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><time datetime="2026-10-25T20:30" data-booking-when>25 октября 2026, 20:30</time></li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/></svg>2 гостя</li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Основной зал</li>
-                </ul>
-                <p class="small text-muted-warm mb-0 mt-1">Бронь № 10311</p>
-              </div>
-              <div class="booking-actions" data-booking-actions>
-                  <a class="btn btn-sm btn-outline-primary" href="restaurant.html">Оставить отзыв</a>
-                  <a class="btn btn-sm btn-primary" href="restaurant.html#booking">Повторить</a>
-              </div>
-            </article>
-            <article class="booking-item" data-status="completed" data-booking-id="10207">
-              <img class="booking-thumb" src="img/georgian.svg" alt="" width="96" height="96">
-              <div class="booking-info">
-                <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
-                  <h2 class="h5 mb-0"><a href="restaurant.html" data-booking-name>Хачапури и вино</a></h2>
-                  <span class="badge text-bg-secondary" data-booking-status>Завершено</span>
-                </div>
-                <ul class="meta-list">
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><time datetime="2026-10-11T14:00" data-booking-when>11 октября 2026, 14:00</time></li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/></svg>6 гостей</li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Летняя веранда</li>
-                </ul>
-                <p class="small text-muted-warm mb-0 mt-1">Бронь № 10207</p>
-              </div>
-              <div class="booking-actions" data-booking-actions>
-                  <a class="btn btn-sm btn-outline-primary" href="restaurant.html">Оставить отзыв</a>
-                  <a class="btn btn-sm btn-primary" href="restaurant.html#booking">Повторить</a>
-              </div>
-            </article>
-            <article class="booking-item" data-status="cancelled" data-booking-id="10098">
-              <img class="booking-thumb" src="img/french.svg" alt="" width="96" height="96">
-              <div class="booking-info">
-                <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
-                  <h2 class="h5 mb-0"><a href="restaurant.html" data-booking-name>Le Petit Bistro</a></h2>
-                  <span class="badge text-bg-danger" data-booking-status>Отменено</span>
-                </div>
-                <ul class="meta-list">
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><time datetime="2026-09-27T11:00" data-booking-when>27 сентября 2026, 11:00</time></li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/></svg>2 гостя</li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>У окна</li>
-                </ul>
-                <p class="small text-muted-warm mb-0 mt-1">Бронь № 10098</p>
-              </div>
-              <div class="booking-actions" data-booking-actions>
-                  <a class="btn btn-sm btn-outline-primary" href="restaurant.html#booking">Забронировать снова</a>
-              </div>
-            </article>
-            <article class="booking-item" data-status="completed" data-booking-id="10031">
-              <img class="booking-thumb" src="img/russian.svg" alt="" width="96" height="96">
-              <div class="booking-info">
-                <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
-                  <h2 class="h5 mb-0"><a href="restaurant.html" data-booking-name>Щи да каша</a></h2>
-                  <span class="badge text-bg-secondary" data-booking-status>Завершено</span>
-                </div>
-                <ul class="meta-list">
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><time datetime="2026-09-13T13:00" data-booking-when>13 сентября 2026, 13:00</time></li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/></svg>3 гостя</li>
-                  <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Основной зал</li>
-                </ul>
-                <p class="small text-muted-warm mb-0 mt-1">Бронь № 10031</p>
-              </div>
-              <div class="booking-actions" data-booking-actions>
-                  <a class="btn btn-sm btn-outline-primary" href="restaurant.html">Оставить отзыв</a>
-                  <a class="btn btn-sm btn-primary" href="restaurant.html#booking">Повторить</a>
-              </div>
-            </article>
-          </div>
+          <div class="d-grid gap-3" id="bookingsList"></div>
 
           <div class="empty-state text-center py-5 d-none" id="bookingsEmpty">
             <h2 class="h5">Здесь пока пусто</h2>
@@ -203,28 +89,6 @@
         </div>
       </div>
     </div>
-
-    <template id="bookingTemplate">
-      <article class="booking-item" data-status="upcoming" data-booking-id="0">
-        <img class="booking-thumb" src="img/italian.svg" alt="" width="96" height="96">
-        <div class="booking-info">
-          <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
-            <h2 class="h5 mb-0"><a href="restaurant.html" data-booking-name></a></h2>
-            <span class="badge text-bg-success" data-booking-status>Подтверждено</span>
-          </div>
-          <ul class="meta-list">
-            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><time datetime="T" data-booking-when>—, </time></li>
-            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/></svg>—</li>
-            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>—</li>
-          </ul>
-          <p class="small text-muted-warm mb-0 mt-1">Бронь № 0</p>
-        </div>
-        <div class="booking-actions" data-booking-actions>
-            <a class="btn btn-sm btn-outline-primary" href="restaurant.html#booking">Изменить</a>
-            <button class="btn btn-sm btn-outline-danger" type="button" data-cancel>Отменить</button>
-        </div>
-      </article>
-    </template>
 
     <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -281,6 +145,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="js/api.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/ui.js"></script>
   <script src="js/bookings.js"></script>
 </body>
 </html>
