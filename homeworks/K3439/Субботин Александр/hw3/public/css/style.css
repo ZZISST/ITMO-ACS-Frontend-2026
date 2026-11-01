@@ -524,6 +524,22 @@ h1, h2, h3, .display-font {
   object-fit: cover;
 }
 
+/* Подпись лежит на затемнении поверх фото — она светлая в обеих темах. Bootstrap в тёмном режиме
+   перекрашивает подписи, стрелки и точки карусели в чёрный ([data-bs-theme=dark] .carousel …),
+   поэтому селекторы здесь специфичнее */
+.carousel.gallery .carousel-caption {
+  color: var(--on-photo);
+}
+
+.carousel.gallery .carousel-control-prev-icon,
+.carousel.gallery .carousel-control-next-icon {
+  filter: none;
+}
+
+.carousel.gallery .carousel-indicators [data-bs-target] {
+  background-color: var(--on-photo);
+}
+
 .gallery .carousel-caption {
   left: 0;
   right: 0;
