@@ -67,7 +67,7 @@ function renderFavorites(favorites, cuisines) {
         <img src="${restaurant.image}" alt="" width="64" height="64">
         <div class="flex-grow-1">
           <h3 class="h6 mb-1"><a href="restaurant.html?id=${restaurant.id}">${escapeHtml(restaurant.name)}</a></h3>
-          <p class="small text-muted-warm mb-0">${escapeHtml(cuisineNames[restaurant.cuisineId])} · ${escapeHtml(restaurant.address)}</p>
+          <p class="small text-muted-warm mb-0">${escapeHtml(cuisineNames[restaurant.cuisineId])} · м. ${escapeHtml(restaurant.metro)}</p>
         </div>
         <button class="btn btn-sm btn-light favorite-remove" type="button" data-remove-favorite aria-label="Убрать «${escapeHtml(restaurant.name)}» из избранного">${ICONS.close}</button>
       </article>
