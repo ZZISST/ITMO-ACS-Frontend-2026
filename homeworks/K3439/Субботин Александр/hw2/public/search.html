@@ -13,8 +13,9 @@
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 </head>
 <body class="d-flex flex-column min-vh-100">
+  <a class="skip-link" href="#main">Перейти к основному содержимому</a>
   <header class="site-header sticky-top">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg" aria-label="Основное меню">
       <div class="container">
         <a class="navbar-brand brand-logo" href="index.html">
           <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18M5 18a7 7 0 0 1 14 0M12 11V8M10 8h4"/></svg>
@@ -25,7 +26,7 @@
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav me-auto mb-3 mb-lg-0">
-            <li class="nav-item"><a class="nav-link active" href="search.html">Рестораны</a></li>
+            <li class="nav-item"><a class="nav-link active" href="search.html" aria-current="page">Рестораны</a></li>
             <li class="nav-item"><a class="nav-link" href="bookings.html">Мои брони</a></li>
           </ul>
           <div class="d-flex gap-2" data-guest>
@@ -34,7 +35,7 @@
           </div>
           <div class="dropdown d-none" data-auth>
             <button class="btn user-menu dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="avatar avatar-sm" data-user-initials></span>
+              <span class="avatar avatar-sm" data-user-initials aria-hidden="true"></span>
               <span data-user-name></span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -49,7 +50,7 @@
     </nav>
   </header>
 
-  <main class="flex-grow-1 py-4">
+  <main id="main" tabindex="-1" class="flex-grow-1 py-4">
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -173,19 +174,23 @@
           <p class="small mb-0">Бронирование столиков в ресторанах Санкт-Петербурга.</p>
         </div>
         <div class="col-6 col-md-3">
-          <h2 class="h6 text-white">Сервис</h2>
-          <ul class="list-unstyled small mb-0">
-            <li class="mb-1"><a href="search.html">Рестораны</a></li>
-            <li class="mb-1"><a href="bookings.html">Мои брони</a></li>
-          </ul>
+          <h2 class="h6 text-white" id="footerServiceTitle">Сервис</h2>
+          <nav aria-labelledby="footerServiceTitle">
+            <ul class="list-unstyled small mb-0">
+              <li class="mb-1"><a href="search.html">Рестораны</a></li>
+              <li class="mb-1"><a href="bookings.html">Мои брони</a></li>
+            </ul>
+          </nav>
         </div>
         <div class="col-6 col-md-4">
-          <h2 class="h6 text-white">Аккаунт</h2>
-          <ul class="list-unstyled small mb-0">
-            <li class="mb-1"><a href="login.html">Вход</a></li>
-            <li class="mb-1"><a href="register.html">Регистрация</a></li>
-            <li class="mb-1"><a href="profile.html">Личный кабинет</a></li>
-          </ul>
+          <h2 class="h6 text-white" id="footerAccountTitle">Аккаунт</h2>
+          <nav aria-labelledby="footerAccountTitle">
+            <ul class="list-unstyled small mb-0">
+              <li class="mb-1"><a href="login.html">Вход</a></li>
+              <li class="mb-1"><a href="register.html">Регистрация</a></li>
+              <li class="mb-1"><a href="profile.html">Личный кабинет</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
       <div class="footer-bottom d-flex flex-wrap justify-content-between gap-2">
