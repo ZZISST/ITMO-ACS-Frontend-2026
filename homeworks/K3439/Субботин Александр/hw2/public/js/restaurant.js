@@ -174,7 +174,7 @@ function initBooking() {
       bookingModal.hide();
       showToast(`Столик забронирован: ${formatDate(booking.date)}, ${booking.time}, ${pluralGuests(booking.guests)}. Бронь № ${booking.id} — в разделе «Мои брони».`);
       form.reset();
-      form.classList.remove('was-validated');
+      resetValidation(form);
       initBookingDates();
     } catch (error) {
       showFormError(form, error.message);
@@ -245,7 +245,7 @@ function initReviewForm() {
       restaurant.reviews.push(review);
       renderReviews(review.id);
       form.reset();
-      form.classList.remove('was-validated');
+      resetValidation(form);
       bootstrap.Collapse.getOrCreateInstance('#reviewFormWrap', { toggle: false }).hide();
       showToast('Спасибо! Отзыв опубликован.');
     } catch (error) {

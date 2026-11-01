@@ -149,7 +149,7 @@
                         <p class="fw-semibold mb-0" data-user-name></p>
                       </div>
                       <div class="col-sm-6">
-                        <fieldset class="star-rating">
+                        <fieldset class="star-rating" id="reviewRatingGroup" role="radiogroup" aria-errormessage="reviewRatingError">
                           <legend class="form-label fs-6 mb-2">Оценка</legend>
                           <div class="star-rating-inputs">
                           <input class="visually-hidden" id="star-5" name="rating" type="radio" value="5" required>
@@ -163,13 +163,13 @@
                           <input class="visually-hidden" id="star-1" name="rating" type="radio" value="1" required>
                           <label for="star-1" title="1 из 5"><svg class="icon icon-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><span class="visually-hidden">1 из 5</span></label>
                           </div>
-                          <div class="invalid-feedback">Поставьте оценку от 1 до 5.</div>
+                          <div class="invalid-feedback" id="reviewRatingError">Поставьте оценку от 1 до 5.</div>
                         </fieldset>
                       </div>
                       <div class="col-12">
                         <label class="form-label" for="reviewText">Отзыв</label>
-                        <textarea class="form-control" id="reviewText" name="text" rows="3" minlength="10" maxlength="1000" required></textarea>
-                        <div class="invalid-feedback">Напишите хотя бы пару предложений (от 10 символов).</div>
+                        <textarea class="form-control" id="reviewText" name="text" rows="3" minlength="10" maxlength="1000" required aria-errormessage="reviewTextError"></textarea>
+                        <div class="invalid-feedback" id="reviewTextError">Напишите хотя бы пару предложений (от 10 символов).</div>
                       </div>
                       <div class="col-12">
                         <div class="alert alert-danger d-none mb-3" role="alert" data-form-error></div>
@@ -254,8 +254,8 @@
             <div class="row g-3">
               <div class="col-sm-6">
                 <label class="form-label" for="bookingDate">Дата</label>
-                <input class="form-control" id="bookingDate" name="date" type="date" required>
-                <div class="invalid-feedback">Выберите дату не раньше сегодняшней.</div>
+                <input class="form-control" id="bookingDate" name="date" type="date" required aria-errormessage="bookingDateError">
+                <div class="invalid-feedback" id="bookingDateError">Выберите дату не раньше сегодняшней.</div>
               </div>
               <div class="col-sm-6">
                 <label class="form-label" for="bookingGuests">Количество гостей</label>
@@ -272,7 +272,7 @@
                   <option value="10">10</option>
                 </select>
               </div>
-              <fieldset class="col-12 time-slots">
+              <fieldset class="col-12 time-slots" id="bookingTimeGroup" role="radiogroup" aria-errormessage="bookingTimeError">
                 <legend class="form-label fs-6">Время <span class="small text-muted-warm">(зачёркнутые слоты уже заняты)</span></legend>
                 <div class="d-flex flex-wrap gap-2">
                   <input class="btn-check" id="slot-1200" name="time" type="radio" value="12:00" required>
@@ -296,7 +296,7 @@
                   <input class="btn-check" id="slot-2200" name="time" type="radio" value="22:00">
                   <label class="btn btn-outline-primary btn-sm" for="slot-2200">22:00</label>
                 </div>
-                <div class="invalid-feedback">Выберите свободное время.</div>
+                <div class="invalid-feedback" id="bookingTimeError">Выберите свободное время.</div>
               </fieldset>
               <div class="col-sm-6">
                 <label class="form-label" for="bookingZone">Зона</label>
@@ -308,8 +308,8 @@
               </div>
               <div class="col-sm-6">
                 <label class="form-label" for="bookingPhone">Телефон для связи</label>
-                <input class="form-control" id="bookingPhone" name="phone" type="tel" autocomplete="tel" pattern="^\+?[0-9\s\-\(\)]{10,18}$" required>
-                <div class="invalid-feedback">Например: +7 900 123-45-67.</div>
+                <input class="form-control" id="bookingPhone" name="phone" type="tel" autocomplete="tel" pattern="^\+?[0-9\s\-\(\)]{10,18}$" required aria-errormessage="bookingPhoneError">
+                <div class="invalid-feedback" id="bookingPhoneError">Например: +7 900 123-45-67.</div>
               </div>
               <div class="col-12">
                 <label class="form-label" for="bookingComment">Пожелания</label>

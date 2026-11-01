@@ -68,8 +68,8 @@
               <form id="loginForm" class="needs-validation" novalidate>
                 <div class="mb-3">
                   <label class="form-label" for="loginEmail">Электронная почта</label>
-                  <input class="form-control form-control-lg" id="loginEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
-                  <div class="invalid-feedback">Введите корректный адрес почты.</div>
+                  <input class="form-control form-control-lg" id="loginEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com" required aria-errormessage="loginEmailError">
+                  <div class="invalid-feedback" id="loginEmailError">Введите корректный адрес почты.</div>
                 </div>
 
                 <div class="mb-3">
@@ -78,11 +78,11 @@
                     <a class="small" href="#resetModal" data-bs-toggle="modal">Забыли пароль?</a>
                   </div>
                   <div class="input-group has-validation">
-                    <input class="form-control form-control-lg" id="loginPassword" name="password" type="password" autocomplete="current-password" minlength="6" required>
+                    <input class="form-control form-control-lg" id="loginPassword" name="password" type="password" autocomplete="current-password" minlength="6" required aria-errormessage="loginPasswordError">
                     <button class="btn btn-outline-secondary password-toggle" type="button" data-toggle-password="#loginPassword" aria-label="Показать пароль" aria-pressed="false">
                       <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
                     </button>
-                    <div class="invalid-feedback">Пароль — не короче 6 символов.</div>
+                    <div class="invalid-feedback" id="loginPasswordError">Пароль — не короче 6 символов.</div>
                   </div>
                 </div>
 
@@ -111,8 +111,8 @@
           <div class="modal-body">
             <p class="text-muted-warm">Укажите почту, на которую зарегистрирован аккаунт, — пришлём ссылку для сброса пароля.</p>
             <label class="form-label" for="resetEmail">Электронная почта</label>
-            <input class="form-control" id="resetEmail" name="email" type="email" autocomplete="email" required>
-            <div class="invalid-feedback">Введите корректный адрес почты.</div>
+            <input class="form-control" id="resetEmail" name="email" type="email" autocomplete="email" required aria-errormessage="resetEmailError">
+            <div class="invalid-feedback" id="resetEmailError">Введите корректный адрес почты.</div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отмена</button>

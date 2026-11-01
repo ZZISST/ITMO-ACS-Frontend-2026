@@ -145,18 +145,18 @@
           <div class="modal-body">
             <div class="mb-3">
               <label class="form-label" for="editName">Имя и фамилия</label>
-              <input class="form-control" id="editName" name="name" type="text" autocomplete="name" minlength="2" required>
-              <div class="invalid-feedback">Укажите имя.</div>
+              <input class="form-control" id="editName" name="name" type="text" autocomplete="name" minlength="2" required aria-errormessage="editNameError">
+              <div class="invalid-feedback" id="editNameError">Укажите имя.</div>
             </div>
             <div class="mb-3">
               <label class="form-label" for="editEmail">Электронная почта</label>
-              <input class="form-control" id="editEmail" name="email" type="email" autocomplete="email" required>
-              <div class="invalid-feedback">Введите корректный адрес почты.</div>
+              <input class="form-control" id="editEmail" name="email" type="email" autocomplete="email" required aria-errormessage="editEmailError">
+              <div class="invalid-feedback" id="editEmailError">Введите корректный адрес почты.</div>
             </div>
             <div class="mb-3">
               <label class="form-label" for="editPhone">Телефон</label>
-              <input class="form-control" id="editPhone" name="phone" type="tel" autocomplete="tel" pattern="^\+?[0-9\s\-\(\)]{10,18}$" required>
-              <div class="invalid-feedback">Например: +7 900 123-45-67.</div>
+              <input class="form-control" id="editPhone" name="phone" type="tel" autocomplete="tel" pattern="^\+?[0-9\s\-\(\)]{10,18}$" required aria-errormessage="editPhoneError">
+              <div class="invalid-feedback" id="editPhoneError">Например: +7 900 123-45-67.</div>
             </div>
             <div>
               <label class="form-label" for="editBirthday">День рождения <span class="text-muted-warm small">(пришлём комплимент от ресторанов)</span></label>

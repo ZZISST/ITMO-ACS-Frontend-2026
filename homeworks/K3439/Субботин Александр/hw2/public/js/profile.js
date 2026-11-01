@@ -115,7 +115,7 @@ function initEditProfile() {
     form.elements.email.value = currentUser.email;
     form.elements.phone.value = currentUser.phone ?? '';
     form.elements.birthday.value = currentUser.birthday ?? '';
-    form.classList.remove('was-validated');
+    resetValidation(form);
     showFormError(form, '');
   });
 

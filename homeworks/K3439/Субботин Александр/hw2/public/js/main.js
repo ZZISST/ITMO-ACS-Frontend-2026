@@ -77,12 +77,48 @@ function showToast(message, variant = 'success') {
   instance.show();
 }
 
+// Bootstrap подсвечивает ошибки только цветом. Для скринридера помечаем поле aria-invalid
+// и, пока ошибка видна, добавляем её текст (id из aria-errormessage) в aria-describedby
+function syncValidity(form) {
+  form.querySelectorAll('[aria-errormessage]').forEach((field) => {
+    const controls = field.matches('fieldset') ? [...field.querySelectorAll('input')] : [field];
+    const invalid = controls.some((control) => !control.validity.valid);
+    const errorId = field.getAttribute('aria-errormessage');
+    const describedBy = (field.getAttribute('aria-describedby') ?? '').split(' ').filter((id) => id && id !== errorId);
+    if (invalid) describedBy.push(errorId);
+
+    field.setAttribute('aria-invalid', String(invalid));
+    if (describedBy.length) field.setAttribute('aria-describedby', describedBy.join(' '));
+    else field.removeAttribute('aria-describedby');
+  });
+}
+
+// Сброс подсветки ошибок (после успешной отправки или при повторном открытии модалки)
+function resetValidation(form) {
+  form.classList.remove('was-validated');
+  form.querySelectorAll('[aria-errormessage]').forEach((field) => {
+    field.removeAttribute('aria-invalid');
+    const errorId = field.getAttribute('aria-errormessage');
+    const describedBy = (field.getAttribute('aria-describedby') ?? '').split(' ').filter((id) => id && id !== errorId);
+    if (describedBy.length) field.setAttribute('aria-describedby', describedBy.join(' '));
+    else field.removeAttribute('aria-describedby');
+  });
+}
+
 // Bootstrap-валидация: подсвечиваем поля и вызываем handler только для валидной формы.
 // Пока handler ждёт ответа API, кнопка отправки заблокирована.
 function onValidSubmit(form, handler) {
+  // После первой попытки отправки статус полей обновляется по мере ввода
+  const resync = () => {
+    if (form.classList.contains('was-validated')) queueMicrotask(() => syncValidity(form));
+  };
+  form.addEventListener('input', resync);
+  form.addEventListener('change', resync);
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     form.classList.add('was-validated');
+    syncValidity(form);
 
     if (!form.checkValidity()) {
       form.querySelector(':invalid')?.focus();

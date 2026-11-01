@@ -73,40 +73,40 @@
                 <div class="row g-3">
                   <div class="col-12">
                     <label class="form-label" for="registerName">Имя и фамилия</label>
-                    <input class="form-control" id="registerName" name="name" type="text" autocomplete="name" minlength="2" placeholder="Иван Петров" required>
-                    <div class="invalid-feedback">Как к вам обращаться?</div>
+                    <input class="form-control" id="registerName" name="name" type="text" autocomplete="name" minlength="2" placeholder="Иван Петров" required aria-errormessage="registerNameError">
+                    <div class="invalid-feedback" id="registerNameError">Как к вам обращаться?</div>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label" for="registerEmail">Электронная почта</label>
-                    <input class="form-control" id="registerEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
-                    <div class="invalid-feedback">Введите корректный адрес почты.</div>
+                    <input class="form-control" id="registerEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com" required aria-errormessage="registerEmailError">
+                    <div class="invalid-feedback" id="registerEmailError">Введите корректный адрес почты.</div>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label" for="registerPhone">Телефон</label>
-                    <input class="form-control" id="registerPhone" name="phone" type="tel" autocomplete="tel" placeholder="+7 900 123-45-67" pattern="^\+?[0-9\s\-\(\)]{10,18}$" required>
-                    <div class="invalid-feedback">Например: +7 900 123-45-67.</div>
+                    <input class="form-control" id="registerPhone" name="phone" type="tel" autocomplete="tel" placeholder="+7 900 123-45-67" pattern="^\+?[0-9\s\-\(\)]{10,18}$" required aria-errormessage="registerPhoneError">
+                    <div class="invalid-feedback" id="registerPhoneError">Например: +7 900 123-45-67.</div>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label" for="registerPassword">Пароль</label>
                     <div class="input-group has-validation">
-                      <input class="form-control" id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="8" aria-describedby="passwordHelp" required>
+                      <input class="form-control" id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="8" aria-describedby="passwordHelp" aria-errormessage="registerPasswordError" required>
                       <button class="btn btn-outline-secondary password-toggle" type="button" data-toggle-password="#registerPassword" aria-label="Показать пароль" aria-pressed="false">
                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
                       </button>
-                      <div class="invalid-feedback">Минимум 8 символов.</div>
+                      <div class="invalid-feedback" id="registerPasswordError">Минимум 8 символов.</div>
                     </div>
                     <div class="form-text" id="passwordHelp">Лучше сочетать буквы и цифры.</div>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label" for="registerPasswordConfirm">Повторите пароль</label>
-                    <input class="form-control" id="registerPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" required>
-                    <div class="invalid-feedback">Повторите пароль — он должен совпадать с первым.</div>
+                    <input class="form-control" id="registerPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" required aria-errormessage="registerPasswordConfirmError">
+                    <div class="invalid-feedback" id="registerPasswordConfirmError">Повторите пароль — он должен совпадать с первым.</div>
                   </div>
                   <div class="col-12">
                     <div class="form-check">
-                      <input class="form-check-input" id="registerAgree" name="agree" type="checkbox" required>
+                      <input class="form-check-input" id="registerAgree" name="agree" type="checkbox" required aria-errormessage="registerAgreeError">
                       <label class="form-check-label" for="registerAgree">Согласен с правилами сервиса и обработкой персональных данных</label>
-                      <div class="invalid-feedback">Без согласия зарегистрироваться не получится.</div>
+                      <div class="invalid-feedback" id="registerAgreeError">Без согласия зарегистрироваться не получится.</div>
                     </div>
                   </div>
                   <div class="col-12">

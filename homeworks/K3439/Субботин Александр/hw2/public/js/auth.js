@@ -78,7 +78,7 @@ function initResetForm() {
     bootstrap.Modal.getOrCreateInstance('#resetModal').hide();
     showToast(`Ссылка для сброса пароля отправлена на ${data.get('email')}`);
     resetForm.reset();
-    resetForm.classList.remove('was-validated');
+    resetValidation(resetForm);
   });
 }
 
