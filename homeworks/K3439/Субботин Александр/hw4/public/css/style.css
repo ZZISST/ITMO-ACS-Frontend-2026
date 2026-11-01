@@ -392,8 +392,11 @@ h1, h2, h3, .display-font {
   color: var(--text);
 }
 
+/* Бледные «₽» тоже текст — Firefox Accessibility Inspector требует для них 4.5:1. Разницу
+   между выбранным и невыбранным уровнем передаём насыщенностью и цветом */
 .price-level .dim {
   color: var(--price-dim);
+  font-weight: 400;
 }
 
 /* ---------- Вход и регистрация ---------- */
@@ -529,6 +532,15 @@ h1, h2, h3, .display-font {
    поэтому селекторы здесь специфичнее */
 .carousel.gallery .carousel-caption {
   color: var(--on-photo);
+}
+
+/* Поверх фото текст мог попасть на светлый участок картинки (Firefox: 2.64:1) —
+   под подписью своя полупрозрачная тёмная подложка, белый на ней не меньше 5.7:1 на любом фоне */
+.gallery .carousel-caption p {
+  display: inline-block;
+  padding: 0.25rem 0.85rem;
+  border-radius: 2rem;
+  background: var(--photo-caption-bg);
 }
 
 .carousel.gallery .carousel-control-prev-icon,

@@ -21,7 +21,7 @@
   --brand: #b4441f;
   --brand-rgb: 180, 68, 31;
   --brand-dark: #8f3416;
-  --brand-gradient-end: #c8642f;
+  --brand-gradient-end: #b94f24;
   --brand-text: #f08d63;      /* 7.7:1 */
   --brand-text-rgb: 240, 141, 99;
   --brand-text-hover: #f6b28f;
@@ -47,12 +47,13 @@
   --star: #e8b02a;
   --star-off: #4a3d33;
   --progress-bg: #33281f;
-  --price-dim: #5e5045;
+  --price-dim: #9d8c7d;         /* 5.2:1 */
 
   /* Мелочи */
   --badge-cuisine-bg: rgba(23, 18, 14, 0.85);
   --pill-badge-bg: rgba(255, 255, 255, 0.9);
   --photo-overlay: rgba(0, 0, 0, 0.65);
+  --photo-caption-bg: rgba(0, 0, 0, 0.6);
   --on-photo: #ffffff;
   --dots: #4a3d33;
   --map-bg: #1f2a1d;

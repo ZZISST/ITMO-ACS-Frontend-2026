@@ -323,7 +323,7 @@ h1, h2, h3, .display-font {
 
 .cta {
   border-radius: calc(var(--radius) * 1.5);
-  background: linear-gradient(120deg, var(--brand) 0%, #c8642f 100%);
+  background: linear-gradient(120deg, var(--brand) 0%, #b94f24 100%);
   color: #fff;
   padding: 3rem 2rem;
 }
@@ -422,8 +422,11 @@ h1, h2, h3, .display-font {
   color: var(--text);
 }
 
+/* Бледные «₽» тоже текст — Firefox Accessibility Inspector требует для них 4.5:1. Разницу
+   между выбранным и невыбранным уровнем передаём насыщенностью и цветом (5.1:1 к белому) */
 .price-level .dim {
-  color: #cbbfb2;
+  color: #7a6c60;
+  font-weight: 400;
 }
 
 /* ---------- Вход и регистрация ---------- */
@@ -442,7 +445,7 @@ h1, h2, h3, .display-font {
 .auth-aside {
   flex-direction: column;
   padding: 3rem 2.5rem 0;
-  background: linear-gradient(160deg, var(--brand) 0%, #c8642f 100%);
+  background: linear-gradient(160deg, var(--brand) 0%, #b94f24 100%);
   color: #fff;
 }
 
@@ -560,6 +563,15 @@ h1, h2, h3, .display-font {
   bottom: 0;
   padding: 2.5rem 1.5rem 2.25rem;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+}
+
+/* Поверх фото текст мог попасть на светлый участок картинки (Firefox: 2.64:1) —
+   под подписью своя полупрозрачная тёмная подложка, белый на ней не меньше 5.7:1 на любом фоне */
+.gallery .carousel-caption p {
+  display: inline-block;
+  padding: 0.25rem 0.85rem;
+  border-radius: 2rem;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .feature-list {
