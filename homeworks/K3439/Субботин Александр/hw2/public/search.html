@@ -61,7 +61,7 @@
 
       <div class="mb-4">
         <h1 class="mb-1">Рестораны Петербурга</h1>
-        <p class="text-muted-warm mb-0">Найдено: <strong id="resultsCount">…</strong></p>
+        <p class="text-muted-warm mb-0" role="status">Найдено: <strong id="resultsCount">…</strong></p>
       </div>
 
       <div class="row g-4">
@@ -87,15 +87,15 @@
 
                 <fieldset class="mb-4">
                   <legend class="filter-title">Средний чек</legend>
-                  <div class="btn-group w-100" role="group">
+                  <div class="btn-group w-100">
                     <input class="btn-check" id="price-1" name="price" type="checkbox" value="1" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="price-1">₽</label>
+                    <label class="btn btn-outline-primary" for="price-1"><span aria-hidden="true">₽</span><span class="visually-hidden">до 1&nbsp;000&nbsp;₽</span></label>
                     <input class="btn-check" id="price-2" name="price" type="checkbox" value="2" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="price-2">₽₽</label>
+                    <label class="btn btn-outline-primary" for="price-2"><span aria-hidden="true">₽₽</span><span class="visually-hidden">1&nbsp;000–2&nbsp;500&nbsp;₽</span></label>
                     <input class="btn-check" id="price-3" name="price" type="checkbox" value="3" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="price-3">₽₽₽</label>
+                    <label class="btn btn-outline-primary" for="price-3"><span aria-hidden="true">₽₽₽</span><span class="visually-hidden">от 2&nbsp;500&nbsp;₽</span></label>
                   </div>
-                  <p class="form-text mb-0">₽ — до 1&nbsp;000&nbsp;₽, ₽₽ — 1&nbsp;000–2&nbsp;500&nbsp;₽, ₽₽₽ — от 2&nbsp;500&nbsp;₽ на человека</p>
+                  <p class="form-text mb-0" aria-hidden="true">₽ — до 1&nbsp;000&nbsp;₽, ₽₽ — 1&nbsp;000–2&nbsp;500&nbsp;₽, ₽₽₽ — от 2&nbsp;500&nbsp;₽ на человека</p>
                 </fieldset>
 
                 <fieldset class="mb-4">
@@ -143,7 +143,7 @@
               </select>
               <button class="btn btn-outline-primary d-lg-none text-nowrap" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtersPanel" aria-controls="filtersPanel">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-                Фильтры <span class="badge text-bg-primary d-none" id="activeFiltersBadge"></span>
+                Фильтры <span class="badge text-bg-primary d-none"><span class="visually-hidden">, выбрано: </span><span id="activeFiltersBadge"></span></span>
               </button>
             </div>
           </div>

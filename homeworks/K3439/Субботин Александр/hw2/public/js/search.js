@@ -100,7 +100,7 @@ async function loadRestaurants() {
 
   const active = countActive(filters);
   activeBadge.textContent = active;
-  activeBadge.classList.toggle('d-none', active === 0);
+  activeBadge.parentElement.classList.toggle('d-none', active === 0);
   list.setAttribute('aria-busy', 'true');
 
   try {

@@ -55,14 +55,24 @@ function formatRating(value) {
   return value ? value.toFixed(1) : '—';
 }
 
+// Скринридер прочитал бы «₽₽» как «рубль рубль», поэтому у значка есть текстовая альтернатива
 function priceLevelHtml(level) {
   const dim = '₽'.repeat(3 - level);
-  return `<span class="price-level">${'₽'.repeat(level)}${dim ? `<span class="dim">${dim}</span>` : ''}</span>`;
+  return `<span class="price-level" role="img" aria-label="Ценовой уровень ${level} из 3">${'₽'.repeat(level)}${dim ? `<span class="dim">${dim}</span>` : ''}</span>`;
 }
 
-function starsHtml(value) {
+// «~» читается как «тильда» — вслух говорим «средний чек около …»
+function avgCheckHtml(value) {
+  return `<span><span aria-hidden="true">~</span><span class="visually-hidden">средний чек около </span>${formatMoney(value)}</span>`;
+}
+
+function ratingLabel({ value, count }) {
+  return count ? `Рейтинг ${formatRating(value)} из 5, ${pluralReviews(count)}` : 'Отзывов пока нет';
+}
+
+function starsHtml(value, label = `Оценка ${value} из 5`) {
   const star = (on) => ICONS.star.replace('icon icon-fill', `icon icon-fill ${on ? 'star-on' : 'star-off'}`);
-  return `<span class="stars" title="${value} из 5">${[1, 2, 3, 4, 5].map((i) => star(i <= Math.round(value))).join('')}</span>`;
+  return `<span class="stars" role="img" aria-label="${label}">${[1, 2, 3, 4, 5].map((i) => star(i <= Math.round(value))).join('')}</span>`;
 }
 
 // Карточка ресторана для главной и поиска. r — ресторан с _expand=cuisine&_expand=district&_embed=reviews
@@ -77,14 +87,14 @@ function restaurantCardHtml(r, heading = 'h2') {
       <div class="card-body d-flex flex-column">
         <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
           <${heading} class="card-title h5 mb-0"><a href="restaurant.html?id=${r.id}">${escapeHtml(r.name)}</a></${heading}>
-          <span class="rating-pill" title="${pluralReviews(rating.count)}">${ICONS.star}${formatRating(rating.value)}</span>
+          <span class="rating-pill" role="img" aria-label="${ratingLabel(rating)}">${ICONS.star}${formatRating(rating.value)}</span>
         </div>
         <ul class="meta-list mb-3">
           <li>${ICONS.pin}${escapeHtml(r.district?.name)}</li>
-          <li>${priceLevelHtml(r.priceLevel)}~${formatMoney(r.avgCheck)}</li>
+          <li>${priceLevelHtml(r.priceLevel)}${avgCheckHtml(r.avgCheck)}</li>
         </ul>
         <p class="card-text text-muted-warm small">${escapeHtml(r.short)}</p>
-        <a class="btn btn-outline-primary mt-auto" href="restaurant.html?id=${r.id}#booking">Забронировать</a>
+        <a class="btn btn-outline-primary mt-auto" href="restaurant.html?id=${r.id}#booking">Забронировать<span class="visually-hidden"> столик в «${escapeHtml(r.name)}»</span></a>
       </div>
     </article>`;
 }

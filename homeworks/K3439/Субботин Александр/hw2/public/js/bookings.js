@@ -22,17 +22,20 @@ function bookingGroup(booking) {
   return 'upcoming';
 }
 
+// Кнопки повторяются в каждой карточке, поэтому скринридеру дописываем, к какой брони они относятся
 function actionsHtml(booking, group) {
   const page = `restaurant.html?id=${booking.restaurantId}`;
+  const name = escapeHtml(booking.restaurant.name);
+  const context = (text) => `<span class="visually-hidden"> ${text}</span>`;
   if (group === 'upcoming') {
-    return `<a class="btn btn-sm btn-outline-primary" href="${page}">К ресторану</a>
-      <button class="btn btn-sm btn-outline-danger" type="button" data-cancel="${booking.id}">Отменить</button>`;
+    return `<a class="btn btn-sm btn-outline-primary" href="${page}">К ресторану${context(`«${name}»`)}</a>
+      <button class="btn btn-sm btn-outline-danger" type="button" data-cancel="${booking.id}">Отменить${context(`бронь в «${name}» на ${formatDate(booking.date)}, ${booking.time}`)}</button>`;
   }
   if (group === 'completed') {
-    return `<a class="btn btn-sm btn-outline-primary" href="${page}#reviews">Оставить отзыв</a>
-      <a class="btn btn-sm btn-primary" href="${page}#booking">Повторить</a>`;
+    return `<a class="btn btn-sm btn-outline-primary" href="${page}#reviews">Оставить отзыв${context(`о «${name}»`)}</a>
+      <a class="btn btn-sm btn-primary" href="${page}#booking">Повторить${context(`бронь в «${name}»`)}</a>`;
   }
-  return `<a class="btn btn-sm btn-outline-primary" href="${page}#booking">Забронировать снова</a>`;
+  return `<a class="btn btn-sm btn-outline-primary" href="${page}#booking">Забронировать снова${context(`в «${name}»`)}</a>`;
 }
 
 function bookingHtml(booking) {

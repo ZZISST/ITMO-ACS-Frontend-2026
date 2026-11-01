@@ -51,9 +51,9 @@ function renderHeader(features) {
 function renderGallery() {
   const { gallery } = restaurant;
   document.querySelector('#galleryIndicators').innerHTML = gallery.map((_, i) => `
-    <button type="button" data-bs-target="#gallery" data-bs-slide-to="${i}"${i === 0 ? ' class="active" aria-current="true"' : ''} aria-label="Фото ${i + 1}"></button>`).join('');
+    <button type="button" data-bs-target="#gallery" data-bs-slide-to="${i}"${i === 0 ? ' class="active" aria-current="true"' : ''} aria-label="Фото ${i + 1} из ${gallery.length}"></button>`).join('');
   document.querySelector('#galleryInner').innerHTML = gallery.map((photo, i) => `
-    <div class="carousel-item${i === 0 ? ' active' : ''}">
+    <div class="carousel-item${i === 0 ? ' active' : ''}" role="group" aria-roledescription="слайд" aria-label="${i + 1} из ${gallery.length}">
       <img class="d-block w-100" src="${photo.src}" alt="${escapeHtml(photo.alt)}">
       <div class="carousel-caption"><p class="mb-0">${escapeHtml(photo.caption)}</p></div>
     </div>`).join('');
@@ -64,9 +64,9 @@ function renderGallery() {
 
 function renderMenu() {
   const categories = Map.groupBy(restaurant.menu, (item) => item.category);
-  document.querySelector('#menuContainer').innerHTML = [...categories].map(([category, items]) => `
-    <section class="menu-section">
-      <h3 class="h5">${escapeHtml(category)}</h3>
+  document.querySelector('#menuContainer').innerHTML = [...categories].map(([category, items], i) => `
+    <section class="menu-section" aria-labelledby="menu-category-${i}">
+      <h3 class="h5" id="menu-category-${i}">${escapeHtml(category)}</h3>
       <ul class="menu-list">
         ${items.map((item) => `
           <li>
@@ -84,7 +84,7 @@ function reviewHtml(review, isNew = false) {
   return `
     <article class="review${isNew ? ' review-new' : ''}">
       <div class="d-flex align-items-center gap-3 mb-2">
-        <span class="avatar avatar-sm">${escapeHtml(getInitials(review.author))}</span>
+        <span class="avatar avatar-sm" aria-hidden="true">${escapeHtml(getInitials(review.author))}</span>
         <div>
           <h3 class="h6 mb-0">${escapeHtml(review.author)}</h3>
           <time class="small text-muted-warm" datetime="${review.date}">${formatDate(review.date, { year: true })}</time>
@@ -102,18 +102,21 @@ function renderReviews(newReviewId) {
 
   document.querySelectorAll('[data-rating-value]').forEach((el) => { el.textContent = formatRating(rating.value); });
   document.querySelectorAll('[data-reviews-count-label]').forEach((el) => { el.textContent = pluralReviews(rating.count); });
-  document.querySelector('#ratingStars').innerHTML = starsHtml(rating.value);
+  document.querySelector('[data-rating-pill]').setAttribute('aria-label', rating.count ? `Рейтинг ${formatRating(rating.value)} из 5` : 'Рейтинга пока нет');
+  document.querySelector('#ratingStars').innerHTML = starsHtml(rating.value, rating.count ? `Средняя оценка ${formatRating(rating.value)} из 5` : 'Оценок пока нет');
 
+  // Полоски — только картинка, скринридеру отдаём ту же информацию текстом
   document.querySelector('#ratingBars').innerHTML = [5, 4, 3, 2, 1].map((stars) => {
     const percent = rating.count ? Math.round((reviews.filter((r) => r.rating === stars).length / rating.count) * 100) : 0;
     return `
-      <div class="d-flex align-items-center gap-2 small">
-        <span class="text-nowrap">${stars} ★</span>
-        <div class="progress flex-grow-1" role="progressbar" aria-label="Оценка ${stars}" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100">
+      <li class="d-flex align-items-center gap-2 small">
+        <span class="visually-hidden">${pluralize(stars, ['звезда', 'звезды', 'звёзд'])}: ${percent}% отзывов</span>
+        <span class="text-nowrap" aria-hidden="true">${stars} ★</span>
+        <div class="progress flex-grow-1" aria-hidden="true">
           <div class="progress-bar" style="width: ${percent}%"></div>
         </div>
-        <span class="text-muted-warm bar-value">${percent}%</span>
-      </div>`;
+        <span class="text-muted-warm bar-value" aria-hidden="true">${percent}%</span>
+      </li>`;
   }).join('');
 
   document.querySelector('#reviewsList').innerHTML = reviews.length
