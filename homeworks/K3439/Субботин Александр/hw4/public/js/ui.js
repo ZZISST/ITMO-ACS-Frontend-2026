@@ -1,11 +1,12 @@
 // Общие функции отрисовки данных, пришедших из API
 
+// Иконки для разметки, которую рисует JS, — те же символы из спрайта (iconHtml в main.js)
 const ICONS = {
-  star: '<svg class="icon icon-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
-  pin: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
-  calendar: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
-  users: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/></svg>',
-  close: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>',
+  star: iconHtml('star', 'icon icon-fill'),
+  pin: iconHtml('pin'),
+  calendar: iconHtml('calendar'),
+  users: iconHtml('users'),
+  close: iconHtml('close'),
 };
 
 // Всё, что ввёл пользователь (отзывы, имена, комментарии), экранируем перед вставкой в HTML

@@ -1,5 +1,12 @@
 // Общий скрипт для всех страниц «Столика». Подключается после api.js.
 
+// Все иконки лежат в одном SVG-спрайте, на странице на них только ссылки <use>
+const SPRITE_URL = 'img/sprite.svg';
+
+function iconHtml(name, className = 'icon') {
+  return `<svg class="${className}" aria-hidden="true"><use href="${SPRITE_URL}#${name}"></use></svg>`;
+}
+
 function getInitials(name = '') {
   return name
     .split(' ')
